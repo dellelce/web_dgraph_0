@@ -6,7 +6,7 @@ help:
 	@[ -f "help.txt" ] && cat help.txt || echo "No help available."
 
 build: Dockerfile
-	@docker build -t $(NAME) -t $(NAME):latest -t $(NAME):local -t registry.dellelce.net/$(NAME) . && docker push http://registry.dellelce.net/$(NAME)
+	@docker build -t $(NAME) -t $(NAME):latest  .
 
 # run here is expected only to be used for testing
 run: build
