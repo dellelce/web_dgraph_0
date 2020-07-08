@@ -4,23 +4,8 @@ networks:
     apps:
         external: true
 
-configs:
-    dummy:
-        file: ./conf/dummy.yml
-
 services:
-    db_null:
-        image: db_pg_null
-        networks:
-           - apps
-
     default:
-        image: db_pg_1
+        image: db_dgraph_0
         networks:
            - apps
-        configs:
-           - source: dummy
-             target: /etc/dummy.yml
-        volumes:
-           - './db_pg_1/data:/app/data/pg'
-
