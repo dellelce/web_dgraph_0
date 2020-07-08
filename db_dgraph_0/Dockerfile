@@ -1,4 +1,4 @@
 #
-FROM dellelce/timescaledb
+FROM dgraph/standalone:v20.03.0
 
-RUN echo "dummy" > /tmp/dummy.txt
+VOLUME /dgraph
