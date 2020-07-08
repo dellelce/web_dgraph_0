@@ -1,8 +1,8 @@
 # "Global" makefile
 
 COMPONENTS  = $$(for dir in */Makefile; do echo $$(basename $$(dirname $$dir)); done )
-DCL         = db_pg_1.yml
-STACK       = db_pg
+DCL         = db_dgraph_0.yml
+STACK       = db_dgraph
 
 # $HELP$
 # help          Print this message
@@ -25,23 +25,8 @@ build:
 
 # deploy only if nothing is running
 .PHONY: deploy
-deploy: build datadir
-	@ docker stack ps -q $(STACK) > /dev/null 2>&1 && { echo "Make sure you 'undeploy' first"; } || { docker stack deploy $(STACK) -c $(DCL); }
-
-.PHONY: datadir
-datadir: db_pg_1/data
-
-db_pg_1/data:
-	@mkdir db_pg_1/data
-
-# remove datadire and its content
-.PHONY:
-rmdata:
-	@rm -rf db_pg_1/data
-
-# empty contents of datadir
-.PHONY: cleandata
-cleandata: rmdata datadir
+deploy: build
+	@docker stack ps -q $(STACK) > /dev/null 2>&1 && { echo "Make sure you 'undeploy' first"; } || { docker stack deploy $(STACK) -c $(DCL); }
 
 
 .PHONY: undeploy
