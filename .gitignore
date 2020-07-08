@@ -1,0 +1,3 @@
+logs.*.txt
+*.log
+db_pg_1/data
